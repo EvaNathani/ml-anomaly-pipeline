@@ -1,0 +1,30 @@
+data:
+  dataset: "NAB"
+  source: "numenta/NAB"
+  file: "realAWSCloudwatch/ec2_cpu_utilization_24ae8d.csv"
+  sequence_length: 50
+  train_split: 0.8
+  normalize: true
+
+model:
+  type: "lstm_autoencoder"
+  input_size: 1
+  hidden_size: 64
+  num_layers: 2
+  dropout: 0.2
+
+training:
+  epochs: 50
+  batch_size: 32
+  learning_rate: 0.001
+  patience: 10
+  threshold_percentile: 95
+
+mlflow:
+  experiment_name: "anomaly-detection"
+  run_name: "lstm-autoencoder-baseline"
+  tracking_uri: "mlruns"
+
+output:
+  model_dir: "outputs/models"
+  results_dir: "outputs/results"
